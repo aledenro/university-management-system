@@ -1,0 +1,8 @@
+CREATE OR REPLACE PROCEDURE login(correo IN VARCHAR2, cl OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR SELECT * FROM Usuarios WHERE email = correo;
+END;
+
+
+
