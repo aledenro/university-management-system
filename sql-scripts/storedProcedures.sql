@@ -64,3 +64,20 @@ AS
 BEGIN
     OPEN cl FOR SELECT * FROM Profesores WHERE Profesores.cedula = vcedula;
 END;
+
+CREATE OR REPLACE PROCEDURE createProfesor(
+    vnombre IN VARCHAR2,
+    vapellido IN VARCHAR2,
+    vcorreo IN VARCHAR2,
+    vnumero_tel IN INT,
+    vcedula IN VARCHAR2
+    )
+AS
+    vid INT;
+BEGIN
+    SELECT MAX(id_profesor) + 1 INTO vid
+    FROM Profesores;
+    
+    INSERT INTO Profesores(id_profesor, nombre, apellido, email, num_celular, cedula)
+    VALUES (vid, vnombre, vapellido, vcorreo, vnumero_tel, vcedula);
+END;

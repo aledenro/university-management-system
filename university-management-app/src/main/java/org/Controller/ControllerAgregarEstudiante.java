@@ -101,7 +101,7 @@ public class ControllerAgregarEstudiante implements MouseListener {
         boolean creado = modelCreateEntity.createEstudiante(nombre, apellido, correo, Integer.parseInt(num_telefono), cedula);
 
         if(creado){
-            JOptionPane.showMessageDialog(this.agregarEstudiante, "Estudiante creado de manera satisgactoria.");
+            JOptionPane.showMessageDialog(this.agregarEstudiante, "Estudiante creado de manera satisfactoria.");
             setEmptyValues();
         }else{
             JOptionPane.showMessageDialog(this.agregarEstudiante, "Error al agregar el estudiante, contacte un administrador",

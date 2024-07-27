@@ -32,7 +32,7 @@ public class ModelListarProfesores {
 
             return profesores;
         }catch (SQLException e) {
-            throw new RuntimeException("Error al conectarse a la base de datos al extraer los estudiantes (getEstudiantes): " + e);
+            throw new RuntimeException("Error al conectarse a la base de datos al extraer los profesores (getProfesores): " + e);
         }
     }
 }
