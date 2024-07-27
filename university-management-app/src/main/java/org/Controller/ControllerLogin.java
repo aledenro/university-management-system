@@ -7,7 +7,6 @@ import org.View.MainMenu;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
 
 public class ControllerLogin implements MouseListener {
     Login login;
@@ -68,7 +67,7 @@ public class ControllerLogin implements MouseListener {
             this.login.setVisible(false);
             MainMenu mainMenu = new MainMenu();
             mainMenu.setVisible(true);
-            MainMenuController mainMenuController = new MainMenuController(mainMenu);
+            ControllerMainMenu controllerMainMenu = new ControllerMainMenu(mainMenu);
         }else {
             JOptionPane.showMessageDialog(this.login, resultadoLogin, "Warning", JOptionPane.WARNING_MESSAGE);
         }

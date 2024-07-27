@@ -1,15 +1,17 @@
 package org.Controller;
 
+import org.Model.ModelListarEstudiantes;
+import org.View.ListarEstudiantes;
 import org.View.MainMenu;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MainMenuController implements MouseListener {
+public class ControllerMainMenu implements MouseListener {
 
     MainMenu mainMenu;
 
-    public MainMenuController(MainMenu mainMenu) {
+    public ControllerMainMenu(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
         this.mainMenu.getBtnEstudiantes().addMouseListener(this);
     }
@@ -17,7 +19,7 @@ public class MainMenuController implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == this.mainMenu.getBtnEstudiantes()){
-            System.out.println("Estudiantes");
+            btnEstudiantesClicked();
         }
     }
 
@@ -39,5 +41,12 @@ public class MainMenuController implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    private void btnEstudiantesClicked(){
+        this.mainMenu.setVisible(false);
+        ListarEstudiantes listarEstudiantes = new ListarEstudiantes();
+        ControllerListarEstudiantes modelListarEstudiantes = new ControllerListarEstudiantes(listarEstudiantes);
+        listarEstudiantes.setVisible(true);
     }
 }
