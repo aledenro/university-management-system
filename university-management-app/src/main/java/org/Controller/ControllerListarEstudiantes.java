@@ -1,6 +1,7 @@
 package org.Controller;
 
 import org.View.AgregarEstudiante;
+import org.View.EditarEstudiante;
 import org.View.ListarEstudiantes;
 import org.View.MainMenu;
 
@@ -15,6 +16,7 @@ public class ControllerListarEstudiantes implements MouseListener {
         this.listarEstudiantes = listarEstudiantes;
         this.listarEstudiantes.getBtnVolver().addMouseListener(this);
         this.listarEstudiantes.getBtnAgregarEstudiante().addMouseListener(this);
+        this.listarEstudiantes.getBtnEditarEstudiante().addMouseListener(this);
     }
 
     @Override
@@ -24,6 +26,9 @@ public class ControllerListarEstudiantes implements MouseListener {
         }
         if (e.getSource() == this.listarEstudiantes.getBtnAgregarEstudiante()){
             btnAgregarEstudianteClicked();
+        }
+        if(e.getSource() == listarEstudiantes.getBtnEditarEstudiante()){
+            btnEditarEstudianteClicked();
         }
     }
 
@@ -59,5 +64,12 @@ public class ControllerListarEstudiantes implements MouseListener {
         AgregarEstudiante agregarEstudiante = new AgregarEstudiante();
         ControllerAgregarEstudiante controllerAgregarEstudiante = new ControllerAgregarEstudiante(agregarEstudiante);
         agregarEstudiante.setVisible(true);
+    }
+
+    private void btnEditarEstudianteClicked(){
+        this.listarEstudiantes.setVisible(false);
+        EditarEstudiante editarEstudiante = new EditarEstudiante();
+        ControllerEditarEstudiante controllerEditarEstudiante = new ControllerEditarEstudiante(editarEstudiante);
+        editarEstudiante.setVisible(true);
     }
 }

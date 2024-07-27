@@ -42,6 +42,7 @@ public class ListarEstudiantes extends javax.swing.JFrame {
         tblEstudiantes = new javax.swing.JTable();
         btnAgregarEstudiante = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        btnEditarEstudiante = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +63,13 @@ public class ListarEstudiantes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblEstudiantes);
 
         btnAgregarEstudiante.setText("Agregar Estudiante");
+        btnAgregarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEstudianteActionPerformed(evt);
+            }
+        });
+
+        btnEditarEstudiante.setText("Editar Estudiante");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,24 +82,27 @@ public class ListarEstudiantes extends javax.swing.JFrame {
                         .addComponent(btnVolver)
                         .addGap(256, 256, 256)
                         .addComponent(lblTitle)
-                        .addGap(147, 147, 147)
-                        .addComponent(btnAgregarEstudiante))
+                        .addGap(61, 61, 61)
+                        .addComponent(btnAgregarEstudiante)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditarEstudiante))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarEstudiante)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(11, 11, 11))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregarEstudiante)
+                        .addComponent(btnEditarEstudiante)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,6 +118,10 @@ public class ListarEstudiantes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEstudianteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarEstudianteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,6 +160,7 @@ public class ListarEstudiantes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarEstudiante;
+    private javax.swing.JButton btnEditarEstudiante;
     private javax.swing.JButton btnVolver;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -152,12 +168,15 @@ public class ListarEstudiantes extends javax.swing.JFrame {
     private javax.swing.JTable tblEstudiantes;
     // End of variables declaration//GEN-END:variables
 
-
     public JButton getBtnAgregarEstudiante() {
         return btnAgregarEstudiante;
     }
 
     public JButton getBtnVolver() {
         return btnVolver;
+    }
+
+    public JButton getBtnEditarEstudiante() {
+        return btnEditarEstudiante;
     }
 }
