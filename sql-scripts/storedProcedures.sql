@@ -4,5 +4,11 @@ BEGIN
     OPEN cl FOR SELECT * FROM Usuarios WHERE email = correo;
 END;
 
+CREATE OR REPLACE PROCEDURE getUsuario(cedula IN VARCHAR2, cl OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR SELECT * FROM Estudiante WHERE Estudiante.cedula = cedula;
+END;
+
 
 

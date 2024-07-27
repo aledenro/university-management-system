@@ -1,5 +1,6 @@
 package org.Controller;
 
+import org.View.AgregarEstudiante;
 import org.View.ListarEstudiantes;
 import org.View.MainMenu;
 
@@ -20,6 +21,9 @@ public class ControllerListarEstudiantes implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == this.listarEstudiantes.getBtnVolver()){
             btnVolverClicked();
+        }
+        if (e.getSource() == this.listarEstudiantes.getBtnAgregarEstudiante()){
+            btnAgregarEstudianteClicked();
         }
     }
 
@@ -48,5 +52,12 @@ public class ControllerListarEstudiantes implements MouseListener {
         MainMenu mainMenu = new MainMenu();
         mainMenu.setVisible(true);
         ControllerMainMenu controllerMainMenu = new ControllerMainMenu(mainMenu);
+    }
+
+    private void btnAgregarEstudianteClicked(){
+        this.listarEstudiantes.setVisible(false);
+        AgregarEstudiante agregarEstudiante = new AgregarEstudiante();
+        ControllerAgregarEstudiante controllerAgregarEstudiante = new ControllerAgregarEstudiante(agregarEstudiante);
+        agregarEstudiante.setVisible(true);
     }
 }
