@@ -2,6 +2,7 @@ package org.Controller;
 
 import org.Model.ModelLogin;
 import org.View.Login;
+import org.View.MainMenu;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -64,7 +65,10 @@ public class ControllerLogin implements MouseListener {
         String resultadoLogin = loginLogic.loginLogic(correo, contrasena);
 
         if(resultadoLogin.isEmpty()){
-            System.out.println("Login Correcto");
+            this.login.setVisible(false);
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.setVisible(true);
+            MainMenuController mainMenuController = new MainMenuController(mainMenu);
         }else {
             JOptionPane.showMessageDialog(this.login, resultadoLogin, "Warning", JOptionPane.WARNING_MESSAGE);
         }
