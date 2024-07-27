@@ -1,6 +1,7 @@
 package org.Controller;
 
 import org.Model.ModelListarEstudiantes;
+import org.Model.ModelListarProfesores;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,24 @@ public class ControllerPopularTablas {
 
         for(Object[] estudiante : estudiantes){
             model.addRow(estudiante);
+        }
+
+        tabla.setModel(model);
+    }
+
+    public void popularTablaProfesores(JTable tabla){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Cédula");
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("Correo");
+        model.addColumn("Teléfono");
+
+        ModelListarProfesores modelListarProfesores = new ModelListarProfesores();
+        ArrayList<Object[]> profesores = modelListarProfesores.getProfesores();
+
+        for(Object[] profesor : profesores){
+            model.addRow(profesor);
         }
 
         tabla.setModel(model);

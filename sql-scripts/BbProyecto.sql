@@ -7,6 +7,8 @@ CREATE TABLE Estudiante (
     PRIMARY KEY (id_estudiante)
 );
 
+ALTER TABLE Estudiante
+ADD(cedula varchar(15));
 
 CREATE TABLE Matricula (
     id_matricula INT NOT NULL,
@@ -79,6 +81,9 @@ CREATE TABLE Profesores (
     num_celular int,
     PRIMARY KEY (id_profesor)
 );
+
+ALTER TABLE Profesores
+ADD(cedula varchar(15));
 
 CREATE TABLE Usuarios(
     id_usuario INT NOT NULL,
