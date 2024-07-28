@@ -46,25 +46,28 @@ BEGIN
     WHERE cedula = vcedula;
 END;
 
+--sp get estudiantes
 create or replace PROCEDURE getEstudiantes(cl IN OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cl FOR SELECT cedula, nombre, apellido, email, num_celular FROM Estudiante;
 END;
 
+--sp get all profesores
 create or replace PROCEDURE getProfesores(cl IN OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cl FOR SELECT cedula, nombre, apellido, email, num_celular FROM Profesores;
 END;
 
-
+--sp get profesor by cedula
 CREATE OR REPLACE PROCEDURE getProfesor(vcedula IN VARCHAR2, cl OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cl FOR SELECT * FROM Profesores WHERE Profesores.cedula = vcedula;
 END;
 
+--create new profesor
 CREATE OR REPLACE PROCEDURE createProfesor(
     vnombre IN VARCHAR2,
     vapellido IN VARCHAR2,
@@ -80,4 +83,20 @@ BEGIN
     
     INSERT INTO Profesores(id_profesor, nombre, apellido, email, num_celular, cedula)
     VALUES (vid, vnombre, vapellido, vcorreo, vnumero_tel, vcedula);
+END;
+
+
+--edit profesor 
+CREATE OR REPLACE PROCEDURE editProfesor(
+    vnombre IN VARCHAR2,
+    vapellido IN VARCHAR2,
+    vcorreo IN VARCHAR2,
+    vnumero_tel IN INT,
+    vcedula IN VARCHAR2
+    )
+AS
+BEGIN
+    UPDATE Profesores
+    SET nombre = vnombre, apellido = vapellido, email = vcorreo, num_celular = vnumero_tel
+    WHERE cedula = vcedula;
 END;

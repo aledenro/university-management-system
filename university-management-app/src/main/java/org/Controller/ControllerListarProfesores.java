@@ -25,7 +25,7 @@ public class ControllerListarProfesores implements MouseListener {
             btnAgregarProfesorClicked();
         }
         if(e.getSource() == this.listarProfesores.getBtnEditarProfesor()){
-            btnEditarEstudianteClicked();
+            btnEditarProfesorClicked();
         }
     }
 
@@ -63,10 +63,10 @@ public class ControllerListarProfesores implements MouseListener {
         agregarProfesor.setVisible(true);
     }
 
-    private void btnEditarEstudianteClicked(){
+    private void btnEditarProfesorClicked(){
         this.listarProfesores.setVisible(false);
-        EditarEstudiante editarEstudiante = new EditarEstudiante();
-        ControllerEditarEstudiante controllerEditarEstudiante = new ControllerEditarEstudiante(editarEstudiante);
-        editarEstudiante.setVisible(true);
+        EditarProfesor editarProfesor = new EditarProfesor();
+        ControllerEditarProfesor controllerEditarProfesor = new ControllerEditarProfesor(editarProfesor);
+        editarProfesor.setVisible(true);
     }
 }
