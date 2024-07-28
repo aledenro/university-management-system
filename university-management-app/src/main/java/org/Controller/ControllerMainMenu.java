@@ -1,6 +1,7 @@
 package org.Controller;
 
 import org.Model.ModelListarEstudiantes;
+import org.View.ListarDepartamentos;
 import org.View.ListarEstudiantes;
 import org.View.ListarProfesores;
 import org.View.MainMenu;
@@ -16,6 +17,7 @@ public class ControllerMainMenu implements MouseListener {
         this.mainMenu = mainMenu;
         this.mainMenu.getBtnEstudiantes().addMouseListener(this);
         this.mainMenu.getBtnProfesores().addMouseListener(this);
+        this.mainMenu.getBtnDepartamentos().addMouseListener(this);
     }
 
     @Override
@@ -24,6 +26,8 @@ public class ControllerMainMenu implements MouseListener {
             btnEstudiantesClicked();
         }else if(e.getSource() == this.mainMenu.getBtnProfesores()){
             btnProfesoresClicked();
+        }else if(e.getSource() == this.mainMenu.getBtnDepartamentos()){
+            btnDepartamentosClicked();
         }
     }
 
@@ -59,5 +63,12 @@ public class ControllerMainMenu implements MouseListener {
         ListarProfesores listarProfesores = new ListarProfesores();
         ControllerListarProfesores controllerListarProfesores = new ControllerListarProfesores(listarProfesores);
         listarProfesores.setVisible(true);
+    }
+
+    private void btnDepartamentosClicked(){
+        this.mainMenu.setVisible(false);
+        ListarDepartamentos listarDepartamentos = new ListarDepartamentos();
+        ControllerListarDepartamentos controllerListarDepartamentos = new ControllerListarDepartamentos(listarDepartamentos);
+        listarDepartamentos.setVisible(true);
     }
 }

@@ -1,0 +1,72 @@
+package org.Controller;
+
+import org.View.*;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class ControllerListarDepartamentos implements MouseListener {
+
+    ListarDepartamentos listarDepartamentos;
+
+    public ControllerListarDepartamentos(ListarDepartamentos listarDepartamentos) {
+        this.listarDepartamentos = listarDepartamentos;
+        this.listarDepartamentos.getBtnVolver().addMouseListener(this);
+        this.listarDepartamentos.getBtnAgregarDepartamento().addMouseListener(this);
+        this.listarDepartamentos.getBtnEditarDepartamento().addMouseListener(this);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == this.listarDepartamentos.getBtnVolver()){
+            btnVolverClicked();
+        }
+        if (e.getSource() == this.listarDepartamentos.getBtnAgregarDepartamento()){
+            btnAgregarDepartamentoClicked();
+        }
+        if(e.getSource() == listarDepartamentos.getBtnAgregarDepartamento()){
+            btnEditarDepartamentoClicked();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    private void btnVolverClicked(){
+        this.listarDepartamentos.setVisible(false);
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setVisible(true);
+        ControllerMainMenu controllerMainMenu = new ControllerMainMenu(mainMenu);
+    }
+
+    private void btnAgregarDepartamentoClicked(){
+        this.listarDepartamentos.setVisible(false);
+        AgregarEstudiante agregarEstudiante = new AgregarEstudiante();
+        ControllerAgregarEstudiante controllerAgregarEstudiante = new ControllerAgregarEstudiante(agregarEstudiante);
+        agregarEstudiante.setVisible(true);
+    }
+
+    private void btnEditarDepartamentoClicked(){
+        this.listarDepartamentos.setVisible(false);
+        EditarEstudiante editarEstudiante = new EditarEstudiante();
+        ControllerEditarEstudiante controllerEditarEstudiante = new ControllerEditarEstudiante(editarEstudiante);
+        editarEstudiante.setVisible(true);
+    }
+}

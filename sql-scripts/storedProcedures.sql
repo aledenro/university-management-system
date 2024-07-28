@@ -100,3 +100,17 @@ BEGIN
     SET nombre = vnombre, apellido = vapellido, email = vcorreo, num_celular = vnumero_tel
     WHERE cedula = vcedula;
 END;
+
+--sp get all departamentos
+create or replace PROCEDURE getDepartamentos(cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR SELECT nombre, locacion FROM Departamento;
+END;
+
+--sp get profesor by nombre
+CREATE OR REPLACE PROCEDURE getDepartamento(vnombre IN VARCHAR2, cl OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR SELECT * FROM Departamento WHERE Departamento.nombre = vnombre;
+END;
