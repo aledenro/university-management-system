@@ -24,4 +24,11 @@ public class ControllerFormatValidator {
 
         return matcher.find();
     }
+
+    public boolean verifyOnlyNumbers(String numero){
+        Pattern pattern = Pattern.compile("^[\\d]+$");
+        Matcher matcher = pattern.matcher(numero);
+
+        return matcher.find();
+    }
 }

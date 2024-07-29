@@ -88,5 +88,29 @@ public class ModelCreateEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al agregar departamentos: " + e);
         }
     }
+
+    public boolean createAula(int num_aula, int capacidad){
+        DbConnection conn = new DbConnection();
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call createAula (?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setInt(1, num_aula);
+            callSql.setInt(2, capacidad);
+            int updatedRows = callSql.executeUpdate();
+
+            if (updatedRows > 0){
+                cn.close();
+                callSql.close();
+                return true;
+            }else {
+                cn.close();
+                callSql.close();
+                return false;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al agregar aula: " + e);
+        }
+    }
 }
 

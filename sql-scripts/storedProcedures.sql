@@ -142,3 +142,32 @@ BEGIN
     SET nombre = vnombre, locacion = vubicacion
     WHERE id_departamento = vid;
 END;
+
+--sp get all aulas
+create or replace PROCEDURE getAulas(cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR SELECT * FROM Aula;
+END;
+
+--create new aula
+CREATE OR REPLACE PROCEDURE getAula(
+    vnum_aula IN INT,
+    cl OUT SYS_REFCURSOR
+    )
+AS
+BEGIN
+    OPEN cl FOR SELECT *  FROM Aula WHERE id_aula = vnum_aula;
+END;
+
+--create new aula
+CREATE OR REPLACE PROCEDURE createAula(
+    vnum_aula IN INT,
+    vcapacidad IN INT
+    )
+AS
+
+BEGIN
+    INSERT INTO Aula(id_aula, capacidad)
+    VALUES (vnum_aula, vcapacidad);
+END;
