@@ -3,6 +3,7 @@ package org.Controller;
 import org.Model.ModelGetEntity;
 import org.Model.ModelListarAulas;
 import org.Model.ModelListarDepartamentos;
+import org.Model.ModelListarProfesores;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -36,6 +37,20 @@ public class ControllerPopularDropdowns {
         }
 
         DefaultComboBoxModel model = new DefaultComboBoxModel(aulasArray.toArray());
+
+        comboBox.setModel(model);
+    }
+
+    public void llenarDropdownProfesores(JComboBox comboBox){
+        ModelListarProfesores modelListarProfesores = new ModelListarProfesores();
+        ArrayList<Object[]> profesores = modelListarProfesores.getProfesores();
+        ArrayList<String> profesoresArray = new ArrayList<>();
+
+        for (Object [] profesor : profesores){
+            profesoresArray.add(profesor[5].toString() + " " + profesor[1].toString() + " " + profesor[2].toString());
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(profesoresArray.toArray());
 
         comboBox.setModel(model);
     }

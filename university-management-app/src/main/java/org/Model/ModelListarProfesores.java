@@ -26,7 +26,7 @@ public class ModelListarProfesores {
 
             while(result.next()){
                 Object [] item = {result.getString("cedula"), result.getString("nombre"), result.getString("apellido")
-                        , result.getString("email"), result.getLong("num_celular")};
+                        , result.getString("email"), result.getLong("num_celular"), result.getLong("id_profesor")};
                 profesores.add(item);
             }
 

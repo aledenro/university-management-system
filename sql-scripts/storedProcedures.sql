@@ -195,8 +195,12 @@ BEGIN
     JOIN Profesores p ON a.id_profesor = p.id_profesor;
 END;
 
-
-
+-- get asignatura por nombre
+CREATE OR REPLACE PROCEDURE getAsignatura(vnombre IN VARCHAR2, cl OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR SELECT * FROM Asignatura WHERE Asignatura.nombre = vnombre;
+END;
 
 
 

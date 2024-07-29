@@ -133,4 +133,35 @@ public class ModelGetEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe el aula: " + e);
         }
     }
+
+    public Object[] getAsignatura(String nombre){
+        DbConnection conn = new DbConnection();
+
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call getAsignatura (?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setString(1, nombre);
+            callSql.registerOutParameter(2, OracleTypes.REF_CURSOR);
+            callSql.execute();
+
+            ResultSet result = (ResultSet) callSql.getObject(2);
+
+            if (result.next()){
+                Object[] asignatura = {result.getString("nombre_asignatura"), result.getLong("creditos")
+                        , result.getString("nombre_departamento"), result.getString("nombre_profesor")};
+                cn.close();
+                callSql.close();
+                result.close();
+                return asignatura;
+            }
+
+            cn.close();
+            callSql.close();
+            result.close();
+            return null;
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe la asignatura: " + e);
+        }
+    }
 }
