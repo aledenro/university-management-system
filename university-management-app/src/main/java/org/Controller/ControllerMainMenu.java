@@ -16,6 +16,7 @@ public class ControllerMainMenu implements MouseListener {
         this.mainMenu.getBtnProfesores().addMouseListener(this);
         this.mainMenu.getBtnDepartamentos().addMouseListener(this);
         this.mainMenu.getBtnAulas().addMouseListener(this);
+        this.mainMenu.getBtnAsignaturas().addMouseListener(this);
     }
 
     @Override
@@ -28,6 +29,8 @@ public class ControllerMainMenu implements MouseListener {
             btnDepartamentosClicked();
         }else if(e.getSource() == this.mainMenu.getBtnAulas()){
             btnAulasClicked();
+        }else if(e.getSource() == this.mainMenu.getBtnAsignaturas()){
+            btnAsignaturasClicked();
         }
     }
 
@@ -77,5 +80,12 @@ public class ControllerMainMenu implements MouseListener {
         ListarAulas listarAulas = new ListarAulas();
         ControllerListarAulas controllerListarAulas = new ControllerListarAulas(listarAulas);
         listarAulas.setVisible(true);
+    }
+
+    private void btnAsignaturasClicked(){
+        this.mainMenu.setVisible(false);
+        ListarAsignaturas listarAsignaturas = new ListarAsignaturas();
+        ControllerListarAsignaturas controllerListarAsignaturas = new ControllerListarAsignaturas(listarAsignaturas);
+        listarAsignaturas.setVisible(true);
     }
 }

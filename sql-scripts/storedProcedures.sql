@@ -183,3 +183,21 @@ BEGIN
     SET capacidad = vcapacidad
     WHERE id_aula = vid;
 END;
+
+--sp get all asignaturas
+create or replace PROCEDURE getAsignaturas(cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR 
+    SELECT a.id_asignatura as id_asignatura, a.nombre as nombre_asignatura, a.creditos as creditos, d.nombre as nombre_departamento, p.nombre || ' ' || p.apellido as nombre_profesor
+    FROM Asignatura a
+    JOIN Departamento d ON a.id_departamento = d.id_departamento
+    JOIN Profesores p ON a.id_profesor = p.id_profesor;
+END;
+
+
+
+
+
+
+

@@ -1,9 +1,6 @@
 package org.Controller;
 
-import org.Model.ModelListarAulas;
-import org.Model.ModelListarDepartamentos;
-import org.Model.ModelListarEstudiantes;
-import org.Model.ModelListarProfesores;
+import org.Model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -71,6 +68,23 @@ public class ControllerPopularTablas {
 
         for(Object[] aula : aulas){
             model.addRow(aula);
+        }
+
+        tabla.setModel(model);
+    }
+
+    public void popularTablaAsignaturas(JTable tabla){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nombre Asignatura");
+        model.addColumn("Creditos");
+        model.addColumn("Nombre Departamento");
+        model.addColumn("Nombre Profesor");
+
+        ModelListarAsignaturas modelListarAsignaturas = new ModelListarAsignaturas();
+        ArrayList<Object[]> asignaturas = modelListarAsignaturas.getAsignaturas();
+
+        for(Object[] asignatura : asignaturas){
+            model.addRow(asignatura);
         }
 
         tabla.setModel(model);
