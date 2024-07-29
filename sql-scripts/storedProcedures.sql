@@ -114,3 +114,31 @@ AS
 BEGIN
     OPEN cl FOR SELECT * FROM Departamento WHERE Departamento.nombre = vnombre;
 END;
+
+--create new departamento
+CREATE OR REPLACE PROCEDURE createDepartamento(
+    vnombre IN VARCHAR2,
+    vubicacion IN VARCHAR2
+    )
+AS
+    vid INT;
+BEGIN
+    SELECT MAX(id_departamento) + 1 INTO vid
+    FROM Departamento;
+    
+    INSERT INTO Departamento(id_departamento, nombre, locacion)
+    VALUES (vid, vnombre, vubicacion);
+END;
+
+--edit departamento 
+CREATE OR REPLACE PROCEDURE editDepartamento(
+    vnombre IN VARCHAR2,
+    vubicacion IN VARCHAR2,
+    vid IN INT
+    )
+AS
+BEGIN
+    UPDATE Departamento
+    SET nombre = vnombre, locacion = vubicacion
+    WHERE id_departamento = vid;
+END;

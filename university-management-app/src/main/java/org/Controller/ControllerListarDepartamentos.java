@@ -65,8 +65,9 @@ public class ControllerListarDepartamentos implements MouseListener {
 
     private void btnEditarDepartamentoClicked(){
         this.listarDepartamentos.setVisible(false);
-        EditarEstudiante editarEstudiante = new EditarEstudiante();
-        ControllerEditarEstudiante controllerEditarEstudiante = new ControllerEditarEstudiante(editarEstudiante);
-        editarEstudiante.setVisible(true);
+        EditarDepartamento editarDepartamento = new EditarDepartamento();
+        ControllerEditarDepartamento controllerEditarDepartamento = new ControllerEditarDepartamento(editarDepartamento);
+        controllerEditarDepartamento.setFoundValues();
+        editarDepartamento.setVisible(true);
     }
 }

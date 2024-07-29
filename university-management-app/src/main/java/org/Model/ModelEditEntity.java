@@ -61,4 +61,29 @@ public class ModelEditEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al editar profesor: " + e);
         }
     }
+
+    public boolean editDepartamento(String nombre, String ubicacion, int id_departamento) {
+        DbConnection conn = new DbConnection();
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call editDepartamento (?, ?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setString(1, nombre);
+            callSql.setString(2, ubicacion);
+            callSql.setInt(3, id_departamento);
+            int updatedRows = callSql.executeUpdate();
+
+            if (updatedRows > 0) {
+                cn.close();
+                callSql.close();
+                return true;
+            } else {
+                cn.close();
+                callSql.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al editar departamento: " + e);
+        }
+    }
 }

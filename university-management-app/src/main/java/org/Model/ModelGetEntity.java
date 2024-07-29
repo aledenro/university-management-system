@@ -88,7 +88,7 @@ public class ModelGetEntity {
             ResultSet result = (ResultSet) callSql.getObject(2);
 
             if (result.next()){
-                Object[] departamento = {result.getString("nombre"), result.getString("locacion")};
+                Object[] departamento = {result.getString("nombre"), result.getString("locacion"), result.getLong("id_departamento")};
                 cn.close();
                 callSql.close();
                 result.close();
