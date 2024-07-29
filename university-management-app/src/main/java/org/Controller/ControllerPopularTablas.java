@@ -89,4 +89,21 @@ public class ControllerPopularTablas {
 
         tabla.setModel(model);
     }
+
+    public void popularTablaGrupos(JTable tabla){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Número de Grupo");
+        model.addColumn("Cantidad de Estudiantes");
+        model.addColumn("Nombre Asignatura");
+        model.addColumn("Nombre Profesor");
+
+        ModelListarGrupos modelListarGrupos = new ModelListarGrupos();
+        ArrayList<Object[]> grupos = modelListarGrupos.getGrupos();
+
+        for(Object[] grupo : grupos){
+            model.addRow(grupo);
+        }
+
+        tabla.setModel(model);
+    }
 }

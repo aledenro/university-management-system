@@ -17,6 +17,7 @@ public class ControllerMainMenu implements MouseListener {
         this.mainMenu.getBtnDepartamentos().addMouseListener(this);
         this.mainMenu.getBtnAulas().addMouseListener(this);
         this.mainMenu.getBtnAsignaturas().addMouseListener(this);
+        this.mainMenu.getBtnGrupos().addMouseListener(this);
     }
 
     @Override
@@ -31,6 +32,8 @@ public class ControllerMainMenu implements MouseListener {
             btnAulasClicked();
         }else if(e.getSource() == this.mainMenu.getBtnAsignaturas()){
             btnAsignaturasClicked();
+        }else if(e.getSource() == this.mainMenu.getBtnGrupos()){
+            btnGruposClicked();
         }
     }
 
@@ -87,5 +90,12 @@ public class ControllerMainMenu implements MouseListener {
         ListarAsignaturas listarAsignaturas = new ListarAsignaturas();
         ControllerListarAsignaturas controllerListarAsignaturas = new ControllerListarAsignaturas(listarAsignaturas);
         listarAsignaturas.setVisible(true);
+    }
+
+    private void btnGruposClicked(){
+        this.mainMenu.setVisible(false);
+        ListarGrupos listarGrupos = new ListarGrupos();
+        ControllerListarGrupos controllerListarGrupos = new ControllerListarGrupos(listarGrupos);
+        listarGrupos.setVisible(true);
     }
 }

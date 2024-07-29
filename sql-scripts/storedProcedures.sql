@@ -202,6 +202,59 @@ BEGIN
     OPEN cl FOR SELECT * FROM Asignatura WHERE Asignatura.nombre = vnombre;
 END;
 
+// create asignatura
+create or replace PROCEDURE createAsignatura(
+    vnombre IN VARCHAR2,
+    vcreditos IN INT,
+    vnombreDept IN VARCHAR2,
+    vid_profesor IN INT
+    )
+AS
+    vid INT;
+    vid_dept INT;
+BEGIN
+    SELECT MAX(id_asignatura) + 1 INTO vid
+    FROM Asignatura;
 
+    SELECT id_departamento INTO vid_dept
+    FROM Departamento
+    WHERE nombre = vnombreDept;
 
+    INSERT INTO Asignatura(id_asignatura, nombre, creditos, id_departamento, id_profesor)
+    VALUES (vid, vnombre, vcreditos, vid_dept, vid_profesor);
+END;
 
+// edit asignatura
+create or replace PROCEDURE editAsignatura(
+    vnombre IN VARCHAR2,
+    vcreditos IN INT,
+    vnombreDept IN VARCHAR2,
+    vid_profesor IN INT
+    )
+AS
+    vid INT;
+    vid_dept INT;
+BEGIN
+    SELECT id_asignatura INTO vid
+    FROM Asignatura
+    WHERE nombre = vnombre;
+
+    SELECT id_departamento INTO vid_dept
+    FROM Departamento
+    WHERE nombre = vnombreDept;
+
+    UPDATE Asignatura
+    SET nombre =  vnombre, creditos = vcreditos, id_departamento = vid_dept, id_profesor = vid_profesor
+    WHERE id_asignatura = vid;
+END;
+
+//get all grupos
+create or replace PROCEDURE getGrupos(cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR 
+    SELECT g.id_grupo as id_grupo, num_estudiantes, a.creditos as creditos, a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
+    FROM Grupos g
+    JOIN Asignatura a ON g.id_asignatura = a.id_asignatura
+    JOIN Profesores p ON g.id_profesor = p.id_profesor;
+END;
