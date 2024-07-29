@@ -171,3 +171,15 @@ BEGIN
     INSERT INTO Aula(id_aula, capacidad)
     VALUES (vnum_aula, vcapacidad);
 END;
+
+--edit aula 
+CREATE OR REPLACE PROCEDURE editAula(
+    vid IN INT,
+    vcapacidad IN INT
+    )
+AS
+BEGIN
+    UPDATE Aula
+    SET capacidad = vcapacidad
+    WHERE id_aula = vid;
+END;
