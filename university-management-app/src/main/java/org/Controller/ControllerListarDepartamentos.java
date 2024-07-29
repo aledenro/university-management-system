@@ -24,7 +24,7 @@ public class ControllerListarDepartamentos implements MouseListener {
         if (e.getSource() == this.listarDepartamentos.getBtnAgregarDepartamento()){
             btnAgregarDepartamentoClicked();
         }
-        if(e.getSource() == listarDepartamentos.getBtnAgregarDepartamento()){
+        if(e.getSource() == listarDepartamentos.getBtnEditarDepartamento()){
             btnEditarDepartamentoClicked();
         }
     }
@@ -58,9 +58,9 @@ public class ControllerListarDepartamentos implements MouseListener {
 
     private void btnAgregarDepartamentoClicked(){
         this.listarDepartamentos.setVisible(false);
-        AgregarEstudiante agregarEstudiante = new AgregarEstudiante();
-        ControllerAgregarEstudiante controllerAgregarEstudiante = new ControllerAgregarEstudiante(agregarEstudiante);
-        agregarEstudiante.setVisible(true);
+        AgregarDepartamento agregarDepartamento = new AgregarDepartamento();
+        ControllerAgregarDepartamento controllerAgregarDepartamento = new ControllerAgregarDepartamento(agregarDepartamento);
+        agregarDepartamento.setVisible(true);
     }
 
     private void btnEditarDepartamentoClicked(){

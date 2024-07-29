@@ -73,4 +73,34 @@ public class ModelGetEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe el profesor: " + e);
         }
     }
+
+    public Object[] getDepartamento(String nombre){
+        DbConnection conn = new DbConnection();
+
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call getDepartamento (?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setString(1, nombre);
+            callSql.registerOutParameter(2, OracleTypes.REF_CURSOR);
+            callSql.execute();
+
+            ResultSet result = (ResultSet) callSql.getObject(2);
+
+            if (result.next()){
+                Object[] departamento = {result.getString("nombre"), result.getString("locacion")};
+                cn.close();
+                callSql.close();
+                result.close();
+                return departamento;
+            }
+
+            cn.close();
+            callSql.close();
+            result.close();
+            return null;
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe el departamento: " + e);
+        }
+    }
 }
