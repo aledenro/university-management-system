@@ -17,7 +17,7 @@ public class ModelListarGrupos {
         try {
             Connection cn = conn.connectDb();
 
-            String sql = "{call getGruposaledenro@gmail.com (?)}";
+            String sql = "{call getGrupos (?)}";
             CallableStatement callSql = cn.prepareCall(sql);
             callSql.registerOutParameter(1, OracleTypes.CURSOR);
             callSql.execute();

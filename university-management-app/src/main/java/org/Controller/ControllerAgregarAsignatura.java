@@ -97,7 +97,7 @@ public class ControllerAgregarAsignatura implements MouseListener {
             JOptionPane.showMessageDialog(this.agregarAsignatura, "Asignatura creada de manera satisfactoria.");
             setEmptyValues();
         }else{
-            JOptionPane.showMessageDialog(this.agregarAsignatura, "Error al agregar la asigatura, contacte un administrador",
+            JOptionPane.showMessageDialog(this.agregarAsignatura, "Error al agregar la asignatura, contacte un administrador",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

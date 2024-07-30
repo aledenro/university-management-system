@@ -58,9 +58,9 @@ public class ControllerListarGrupos implements MouseListener {
 
     private void btnAgregarClicked(){
         this.listarGrupos.setVisible(false);
-        AgregarAsignatura agregarAsignatura = new AgregarAsignatura();
-        ControllerAgregarAsignatura controllerAgregarAsignatura = new ControllerAgregarAsignatura(agregarAsignatura);
-        agregarAsignatura.setVisible(true);
+        AgregarGrupo agregarGrupo = new AgregarGrupo();
+        ControllerAgregarGrupo controllerAgregarGrupo = new ControllerAgregarGrupo(agregarGrupo);
+        agregarGrupo.setVisible(true);
     }
 
     private void btnEditarClicked(){
