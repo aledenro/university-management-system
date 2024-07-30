@@ -164,4 +164,35 @@ public class ModelGetEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe la asignatura: " + e);
         }
     }
+
+    public Object[] getGrupo(int num_grupo){
+        DbConnection conn = new DbConnection();
+
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call getGrupo (?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setInt(1, num_grupo);
+            callSql.registerOutParameter(2, OracleTypes.REF_CURSOR);
+            callSql.execute();
+
+            ResultSet result = (ResultSet) callSql.getObject(2);
+
+            if (result.next()){
+                Object[] grupo = {result.getLong("id_grupo"), result.getLong("num_estudiantes")
+                        , result.getString("nombre_asignatura"), result.getString("nombre_profesor")};
+                cn.close();
+                callSql.close();
+                result.close();
+                return grupo;
+            }
+
+            cn.close();
+            callSql.close();
+            result.close();
+            return null;
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe la asignatura: " + e);
+        }
+    }
 }

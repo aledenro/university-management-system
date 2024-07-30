@@ -65,9 +65,9 @@ public class ControllerListarGrupos implements MouseListener {
 
     private void btnEditarClicked(){
         this.listarGrupos.setVisible(false);
-        EditarAsignatura editarAsignatura = new EditarAsignatura();
-        ControllerEditAsignatura controllerEditAsignatura = new ControllerEditAsignatura(editarAsignatura);
-        controllerEditAsignatura.setFoundValues();
-        editarAsignatura.setVisible(true);
+        EditarGrupo editarGrupo = new EditarGrupo();
+        ControllerEditarGrupo controllerEditarGrupo = new ControllerEditarGrupo(editarGrupo);
+        controllerEditarGrupo.setFoundValues();
+        editarGrupo.setVisible(true);
     }
 }

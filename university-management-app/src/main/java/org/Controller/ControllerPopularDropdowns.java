@@ -65,4 +65,18 @@ public class ControllerPopularDropdowns {
 
         comboBox.setModel(model);
     }
+
+    public void llenarDropdownGrupos(JComboBox comboBox){
+        ModelListarGrupos modelListarGrupos = new ModelListarGrupos();
+        ArrayList<Object[]> grupos = modelListarGrupos.getGrupos();
+        ArrayList<String> gruposArray = new ArrayList<>();
+
+        for (Object [] grupo : grupos){
+            gruposArray.add(grupo[0].toString());
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(gruposArray.toArray());
+
+        comboBox.setModel(model);
+    }
 }
