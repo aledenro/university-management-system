@@ -253,8 +253,59 @@ create or replace PROCEDURE getGrupos(cl IN OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cl FOR 
-    SELECT g.id_grupo as id_grupo, num_estudiantes, a.creditos as creditos, a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
+    SELECT g.id_grupo as id_grupo, num_estudiantes, a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
     FROM Grupos g
     JOIN Asignatura a ON g.id_asignatura = a.id_asignatura
     JOIN Profesores p ON g.id_profesor = p.id_profesor;
 END;
+
+//get grupo
+create or replace PROCEDURE getGrupo(vid IN INT,cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR 
+    SELECT g.id_grupo as id_grupo, num_estudiantes, a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
+    FROM Grupos g
+    JOIN Asignatura a ON g.id_asignatura = a.id_asignatura
+    JOIN Profesores p ON g.id_profesor = p.id_profesor
+    WHERE g.id_grupo = vid;
+END;
+
+//create grupo
+create or replace PROCEDURE createGrupo(
+    vnombreAsignatura IN VARCHAR2,
+    vid_profesor IN INT
+    )
+AS
+    vid INT;
+    vid_asig INT;
+BEGIN
+    SELECT MAX(id_grupo) + 1 INTO vid
+    FROM Grupos;
+
+    SELECT id_asignatura INTO vid_asig
+    FROM Asignatura
+    WHERE nombre = vnombreAsignatura;
+
+    INSERT INTO Grupos (id_grupo, num_estudiantes, id_asignatura, id_profesor)
+    VALUES (vid, 0, vid_asig, vid_profesor);
+END;
+
+//update grupo
+create or replace PROCEDURE udpateGrupo(
+    vid IN INT,
+    vnombreAsignatura IN VARCHAR2,
+    vid_profesor IN INT
+    )
+AS
+    vid_asig INT;
+BEGIN
+    SELECT id_asignatura INTO vid_asig
+    FROM Asignatura
+    WHERE nombre = vnombreAsignatura;
+
+    UPDATE Grupos 
+    SET id_asignatura = vid_asig, id_profesor = vid_profesor
+    WHERE id_grupo = vid;
+END;
+
