@@ -162,5 +162,32 @@ public class ModelCreateEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al agregar grupo: " + e);
         }
     }
+
+    public boolean createHorario(String dia, String inicio, String termina, int grupo,  int aula){
+        DbConnection conn = new DbConnection();
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call createHorario(?, ?, ?, ?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setString(1, dia);
+            callSql.setString(2, inicio);
+            callSql.setString(3, termina);
+            callSql.setInt(4, grupo);
+            callSql.setInt(5, aula);
+            int updatedRows = callSql.executeUpdate();
+
+            if (updatedRows > 0){
+                cn.close();
+                callSql.close();
+                return true;
+            }else {
+                cn.close();
+                callSql.close();
+                return false;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al agregar horario: " + e);
+        }
+    }
 }
 

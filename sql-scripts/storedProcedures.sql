@@ -309,3 +309,73 @@ BEGIN
     WHERE id_grupo = vid;
 END;
 
+create or replace PROCEDURE getHorarios(cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR 
+    SELECT h.id_horario as id_horario, dia, TO_CHAR(horaInicio, 'HH24:MI') horaInicio, TO_CHAR(horaFinaliza, 'HH24:MI') horaFinaliza, id_aula as num_aula,
+    a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
+    FROM Horarios h
+    JOIN Grupos g ON h.id_grupo = g.id_grupo
+    JOIN Asignatura a ON g.id_asignatura = a.id_asignatura
+    JOIN Profesores p ON g.id_profesor = p.id_profesor;
+END;
+
+--var cur refcursor;
+--call getHorarios(:cur);
+--print cur
+
+create or replace PROCEDURE createHorario(
+    vdia IN VARCHAR2,
+    vinicio IN VARCHAR2,
+    vfinal IN VARCHAR2,
+    vid_grupo IN INT,
+    vid_aula IN INT
+    )
+AS
+    vid INT;
+BEGIN
+    SELECT MAX(id_horario) + 1 INTO vid
+    FROM Horarios;
+
+    INSERT INTO Horarios (id_horario, dia, horaInicio, horaFinaliza, id_grupo, id_aula)
+    VALUES (vid, vdia, TO_DATE(vinicio, 'HH24:MI'), TO_DATE(vfinal, 'HH24:MI'), vid_grupo, vid_aula);
+END;
+
+/*
+CREATE TABLE Horarios (
+    id_horario INT NOT NULL,
+    dia VARCHAR(20),
+    horaInicio date,
+    horaFinaliza date,
+    id_grupo INT,
+    id_aula INT,
+    PRIMARY KEY (id_horario)
+);
+
+CREATE TABLE Grupos (
+    id_grupo INT NOT NULL,
+    num_estudiantes int,
+    id_asignatura INT,
+    id_profesor INT,
+    PRIMARY KEY (id_grupo)
+);
+
+CREATE TABLE Asignatura (
+    id_asignatura INT NOT NULL,
+    nombre varchar(50),
+    creditos int,
+    id_departamento INT,
+    id_profesor INT,
+    PRIMARY KEY (id_asignatura)
+);
+
+CREATE TABLE Profesores (
+    id_profesor INT NOT NULL,
+    nombre varchar(50),
+    apellido varchar(50),
+    email VARCHAR(50),
+    num_celular int,
+    PRIMARY KEY (id_profesor)
+);
+*/
