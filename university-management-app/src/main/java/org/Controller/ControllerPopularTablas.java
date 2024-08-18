@@ -106,4 +106,24 @@ public class ControllerPopularTablas {
 
         tabla.setModel(model);
     }
+
+    public void popularTablaHorarios(JTable tabla){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Identificador Horario");
+        model.addColumn("Dia");
+        model.addColumn("Hora de Inicio");
+        model.addColumn("Hora de Finalización");
+        model.addColumn("Num. Aula");
+        model.addColumn("Nombre Asignatura");
+        model.addColumn("Nombre Profesor");
+
+        ModelListarHorarios modelListarHorarios = new ModelListarHorarios();
+        ArrayList<Object[]> horarios = modelListarHorarios.getHorarios();
+
+        for(Object[] horario : horarios){
+            model.addRow(horario);
+        }
+
+        tabla.setModel(model);
+    }
 }
