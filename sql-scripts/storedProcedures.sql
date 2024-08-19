@@ -354,7 +354,7 @@ BEGIN
     WHERE id_horario = vid_horario;
 END;
 
-create or replace PROCEDURE udpateHorario(
+create or replace PROCEDURE updateHorario(
     vid IN INT,
     vdia IN VARCHAR2,
     vhora_inicio IN VARCHAR2,
