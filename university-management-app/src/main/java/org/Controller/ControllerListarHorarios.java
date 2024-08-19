@@ -65,9 +65,9 @@ public class ControllerListarHorarios implements MouseListener {
 
     private void btnEditarClicked(){
         this.listarHorarios.setVisible(false);
-        EditarAsignatura editarAsignatura = new EditarAsignatura();
-        ControllerEditAsignatura controllerEditAsignatura = new ControllerEditAsignatura(editarAsignatura);
-        controllerEditAsignatura.setFoundValues();
-        editarAsignatura.setVisible(true);
+        EditarHorario editarHorario = new EditarHorario();
+        ControllerEditHorario controllerEditHorario = new ControllerEditHorario(editarHorario);
+        controllerEditHorario.setFoundValues();
+        editarHorario.setVisible(true);
     }
 }

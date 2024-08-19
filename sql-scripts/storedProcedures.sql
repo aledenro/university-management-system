@@ -342,6 +342,34 @@ BEGIN
     VALUES (vid, vdia, TO_DATE(vinicio, 'HH24:MI'), TO_DATE(vfinal, 'HH24:MI'), vid_grupo, vid_aula);
 END;
 
+create or replace PROCEDURE getHorario(vid_horario IN INT, cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR
+    SELECT h.id_horario as id_horario, dia, TO_CHAR(horaInicio, 'HH24:MI') horaInicio, TO_CHAR(horaFinaliza, 'HH24:MI') horaFinaliza, id_aula as num_aula, h.id_grupo as id_grupo
+    FROM Horarios h
+    JOIN Grupos g ON h.id_grupo = g.id_grupo
+    JOIN Asignatura a ON g.id_asignatura = a.id_asignatura
+    JOIN Profesores p ON g.id_profesor = p.id_profesor
+    WHERE id_horario = vid_horario;
+END;
+
+create or replace PROCEDURE udpateHorario(
+    vid IN INT,
+    vdia IN VARCHAR2,
+    vhora_inicio IN VARCHAR2,
+    vhora_fin IN VARCHAR2,
+    vgrupo IN INT,
+    vaula IN INT
+    )
+AS
+    vid_asig INT;
+BEGIN
+    UPDATE Horarios 
+    SET dia = vdia, horaInicio = TO_DATE(vhora_inicio, 'HH24:MI'), horaFinaliza = TO_DATE(vhora_fin, 'HH24:MI'), id_grupo = vgrupo, id_aula = vaula
+    WHERE id_horario = vid;
+END;
+
 /*
 CREATE TABLE Horarios (
     id_horario INT NOT NULL,

@@ -6,6 +6,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ModelGetEntity {
 
@@ -193,6 +194,40 @@ public class ModelGetEntity {
             return null;
         }catch (SQLException e) {
             throw new RuntimeException("Error al conectarse a la base de datos al revisar si existe la asignatura: " + e);
+        }
+    }
+
+    public Object[] getHorario(int id_horario){
+        ArrayList<Object []> horarios = new ArrayList<>();
+        DbConnection conn = new DbConnection();
+
+        try {
+            Connection cn = conn.connectDb();
+
+            String sql = "{call getHorario(?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setInt(1, id_horario);
+            callSql.registerOutParameter(2, OracleTypes.CURSOR);
+            callSql.execute();
+
+            ResultSet result = (ResultSet) callSql.getObject(2);
+
+            if(result.next()){
+                Object [] item = {result.getLong("id_horario"), result.getString("dia")
+                        , result.getString("horaInicio"), result.getString("horaFinaliza")
+                        , result.getLong("id_grupo"), result.getLong("num_aula")};
+                cn.close();
+                callSql.close();
+                result.close();
+                return item;
+            }
+
+            cn.close();
+            callSql.close();
+            result.close();
+            return null;
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al extraer el horario: " + e);
         }
     }
 }

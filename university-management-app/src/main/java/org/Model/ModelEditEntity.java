@@ -158,7 +158,35 @@ public class ModelEditEntity {
                 return false;
             }
         }catch (SQLException e) {
-            throw new RuntimeException("Error al conectarse a la base de datos al editar asignatura: " + e);
+            throw new RuntimeException("Error al conectarse a la base de datos al editar grupo: " + e);
+        }
+    }
+
+    public boolean editHorario(int idHorario, String dia, String horaInicio, String horaTermina, int grupo, int aula){
+        DbConnection conn = new DbConnection();
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call updateHorario (?, ?, ?, ?, ?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setInt(1, idHorario);
+            callSql.setString(2, dia);
+            callSql.setString(3, horaInicio);
+            callSql.setString(4, horaTermina);
+            callSql.setInt(5, grupo);
+            callSql.setInt(6, aula);
+            int updatedRows = callSql.executeUpdate();
+
+            if (updatedRows > 0){
+                cn.close();
+                callSql.close();
+                return true;
+            }else {
+                cn.close();
+                callSql.close();
+                return false;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al editar horario: " + e);
         }
     }
 }

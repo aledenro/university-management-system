@@ -79,4 +79,18 @@ public class ControllerPopularDropdowns {
 
         comboBox.setModel(model);
     }
+    public void llenarDropdownHorarios(JComboBox comboBox){
+        ModelListarHorarios modelListarHorarios = new ModelListarHorarios();
+        ArrayList<Object[]> horarios = modelListarHorarios.getHorarios();
+        ArrayList<String> horariosArray = new ArrayList<>();
+
+        for (Object [] horario : horarios){
+            horariosArray.add(horario[0].toString());
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(horariosArray.toArray());
+
+        comboBox.setModel(model);
+    }
+
 }
