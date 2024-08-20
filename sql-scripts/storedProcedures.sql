@@ -370,7 +370,42 @@ BEGIN
     WHERE id_horario = vid;
 END;
 
+create or replace PROCEDURE getMatricula(cl IN OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cl FOR
+    SELECT id_matricula, e.cedula, e.nombre, TO_CHAR(m.fechaMatricula, 'DD-MM-YYYY') fechaMatricula, dia, TO_CHAR(horaInicio, 'HH24:MI') horaInicio, TO_CHAR(horaFinaliza, 'HH24:MI') horaFinaliza, id_aula as num_aula,
+    a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
+    
+    FROM Matricula m
+    JOIN Estudiante e ON m.id_estudiante = e.id_estudiante
+    JOIN Horarios h ON m.id_horario = h.id_horario
+    JOIN Grupos g ON h.id_grupo = g.id_grupo
+    JOIN Profesores p ON g.id_profesor = p.id_profesor
+    JOIN Asignatura a ON g.id_asignatura = a.id_asignatura;
+END;
+
 /*
+CREATE TABLE Estudiante (
+    id_estudiante INT NOT NULL,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    email VARCHAR(50),
+    num_celular int,
+    PRIMARY KEY (id_estudiante)
+);
+
+ALTER TABLE Estudiante
+ADD(cedula varchar(15));
+
+CREATE TABLE Matricula (
+    id_matricula INT NOT NULL,
+    fechaMatricula date,
+    id_estudiante INT,
+    id_horario INT,
+    PRIMARY KEY (id_matricula)
+);
+
 CREATE TABLE Horarios (
     id_horario INT NOT NULL,
     dia VARCHAR(20),
@@ -381,13 +416,12 @@ CREATE TABLE Horarios (
     PRIMARY KEY (id_horario)
 );
 
-CREATE TABLE Grupos (
-    id_grupo INT NOT NULL,
-    num_estudiantes int,
-    id_asignatura INT,
-    id_profesor INT,
-    PRIMARY KEY (id_grupo)
+CREATE TABLE Aula (
+    id_aula INT NOT NULL,
+    capacidad int,
+    PRIMARY KEY (id_aula)
 );
+
 
 CREATE TABLE Asignatura (
     id_asignatura INT NOT NULL,
@@ -396,6 +430,21 @@ CREATE TABLE Asignatura (
     id_departamento INT,
     id_profesor INT,
     PRIMARY KEY (id_asignatura)
+);
+
+CREATE TABLE Grupos (
+    id_grupo INT NOT NULL,
+    num_estudiantes int,
+    id_asignatura INT,
+    id_profesor INT,
+    PRIMARY KEY (id_grupo)
+);
+
+CREATE TABLE Departamento (
+    id_departamento INT NOT NULL,
+    nombre varchar(50),
+    locacion varchar(50),
+    PRIMARY KEY (id_departamento)
 );
 
 CREATE TABLE Profesores (

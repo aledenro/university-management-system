@@ -126,4 +126,27 @@ public class ControllerPopularTablas {
 
         tabla.setModel(model);
     }
+
+    public void popularTablaMatriculas(JTable tabla){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Identificador Matricula");
+        model.addColumn("Cedula");
+        model.addColumn("Nombre Estudiante");
+        model.addColumn("Fecha Matricula");
+        model.addColumn("Dia");
+        model.addColumn("Hora de Inicio");
+        model.addColumn("Hora de Finalización");
+        model.addColumn("Num. Aula");
+        model.addColumn("Nombre Asignatura");
+        model.addColumn("Nombre Profesor");
+
+        ModelListarMatriculas modelListarMatriculas = new ModelListarMatriculas();
+        ArrayList<Object[]> matriculas = modelListarMatriculas.getMatriculas();
+
+        for(Object[] matricula : matriculas){
+            model.addRow(matricula);
+        }
+
+        tabla.setModel(model);
+    }
 }
