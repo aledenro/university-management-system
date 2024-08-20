@@ -1,7 +1,9 @@
 package org.Controller;
 
+import org.Model.ModelDeleteEntity;
 import org.View.*;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -64,10 +66,16 @@ public class ControllerListarMatriculas implements MouseListener {
     }
 
     private void btnEditarClicked(){
-        this.listarMatricula.setVisible(false);
-        EditarHorario editarHorario = new EditarHorario();
-        ControllerEditHorario controllerEditHorario = new ControllerEditHorario(editarHorario);
-        controllerEditHorario.setFoundValues();
-        editarHorario.setVisible(true);
+        ModelDeleteEntity modelDeleteEntity = new ModelDeleteEntity();
+        boolean eliminado = modelDeleteEntity.deleteMatricula(Integer.parseInt(listarMatricula.getCboIds().getSelectedItem().toString()));
+
+        if (eliminado){
+            JOptionPane.showMessageDialog(listarMatricula, "Matricula eliminada correctamente.");
+        }
+
+        ControllerPopularTablas controllerPopularTablas = new ControllerPopularTablas();
+        controllerPopularTablas.popularTablaMatriculas(listarMatricula.getTblHorarios());
+        ControllerPopularDropdowns controllerPopularDropdowns = new ControllerPopularDropdowns();
+        controllerPopularDropdowns.llenarDropdownMatriculas(listarMatricula.getCboIds());
     }
 }

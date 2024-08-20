@@ -370,11 +370,11 @@ BEGIN
     WHERE id_horario = vid;
 END;
 
-create or replace PROCEDURE getMatricula(cl IN OUT SYS_REFCURSOR)
+create or replace PROCEDURE getMatriculas(cl IN OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cl FOR
-    SELECT id_matricula, e.cedula, e.nombre, TO_CHAR(m.fechaMatricula, 'DD-MM-YYYY') fechaMatricula, dia, TO_CHAR(horaInicio, 'HH24:MI') horaInicio, TO_CHAR(horaFinaliza, 'HH24:MI') horaFinaliza, id_aula as num_aula,
+    SELECT id_matricula, e.cedula cedula, e.nombre nombre, TO_CHAR(m.fechaMatricula, 'DD-MM-YYYY') fechaMatricula, dia, TO_CHAR(horaInicio, 'HH24:MI') horaInicio, TO_CHAR(horaFinaliza, 'HH24:MI') horaFinaliza, id_aula as num_aula,
     a.nombre as nombre_asignatura, p.nombre || ' ' || p.apellido as nombre_profesor
     
     FROM Matricula m
@@ -383,6 +383,12 @@ BEGIN
     JOIN Grupos g ON h.id_grupo = g.id_grupo
     JOIN Profesores p ON g.id_profesor = p.id_profesor
     JOIN Asignatura a ON g.id_asignatura = a.id_asignatura;
+END;
+
+create or replace PROCEDURE deleteMatricula(vid IN INT)
+AS
+BEGIN
+    DELETE FROM Matricula WHERE id_matricula = vid;
 END;
 
 /*

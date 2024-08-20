@@ -93,4 +93,18 @@ public class ControllerPopularDropdowns {
         comboBox.setModel(model);
     }
 
+    public void llenarDropdownMatriculas(JComboBox comboBox){
+        ModelListarMatriculas modelListarMatriculas = new ModelListarMatriculas();
+        ArrayList<Object[]> matriculas = modelListarMatriculas.getMatriculas();
+        ArrayList<String> matriculasArray = new ArrayList<>();
+
+        for (Object [] matricula : matriculas){
+            matriculasArray.add(matricula[0].toString());
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(matriculasArray.toArray());
+
+        comboBox.setModel(model);
+    }
+
 }

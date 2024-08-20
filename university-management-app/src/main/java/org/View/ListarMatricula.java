@@ -4,6 +4,7 @@
  */
 package org.View;
 
+import org.Controller.ControllerPopularDropdowns;
 import org.Controller.ControllerPopularTablas;
 
 import javax.swing.*;
@@ -23,6 +24,8 @@ public class ListarMatricula extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         ControllerPopularTablas controllerPopularTablas = new ControllerPopularTablas();
         controllerPopularTablas.popularTablaMatriculas(tblHorarios);
+        ControllerPopularDropdowns controllerPopularDropdowns = new ControllerPopularDropdowns();
+        controllerPopularDropdowns.llenarDropdownMatriculas(getCboIds());
         Image iconoVolver = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/volver_icon.png"));
         btnVolver.setIcon(new ImageIcon(iconoVolver.getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH)));
     }
@@ -206,5 +209,9 @@ public class ListarMatricula extends javax.swing.JFrame {
 
     public JComboBox<String> getCboIds() {
         return cboIds;
+    }
+
+    public JTable getTblHorarios() {
+        return tblHorarios;
     }
 }
