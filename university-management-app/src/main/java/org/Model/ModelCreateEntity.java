@@ -189,5 +189,29 @@ public class ModelCreateEntity {
             throw new RuntimeException("Error al conectarse a la base de datos al agregar horario: " + e);
         }
     }
+
+    public boolean createMatricula(String cedula, int idHorario){
+        DbConnection conn = new DbConnection();
+        try {
+            Connection cn = conn.connectDb();
+            String sql = "{call createMatricula(?, ?)}";
+            CallableStatement callSql = cn.prepareCall(sql);
+            callSql.setString(1, cedula);
+            callSql.setInt(2, idHorario);
+            int updatedRows = callSql.executeUpdate();
+
+            if (updatedRows > 0){
+                cn.close();
+                callSql.close();
+                return true;
+            }else {
+                cn.close();
+                callSql.close();
+                return false;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Error al conectarse a la base de datos al agregar matricula: " + e);
+        }
+    }
 }
 

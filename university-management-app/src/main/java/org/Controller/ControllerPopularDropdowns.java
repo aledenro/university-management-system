@@ -107,4 +107,32 @@ public class ControllerPopularDropdowns {
         comboBox.setModel(model);
     }
 
+    public void llenarDropdownHorariosConDetalles(JComboBox comboBox){
+        ModelListarHorarios modelListarHorarios = new ModelListarHorarios();
+        ArrayList<Object[]> horarios = modelListarHorarios.getHorarios();
+        ArrayList<String> horariosArray = new ArrayList<>();
+
+        for (Object [] horario : horarios){
+            horariosArray.add(horario[0].toString() + " - " +  horario[5].toString() + " " + horario[1].toString() + " de " + horario[2].toString() + " a " +horario[3].toString());
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(horariosArray.toArray());
+
+        comboBox.setModel(model);
+    }
+
+
+    public void llenarDropdownEstudiantes (JComboBox comboBox){
+        ModelListarEstudiantes modelListarEstudiantes = new ModelListarEstudiantes();
+        ArrayList<Object[]> estudiantes = modelListarEstudiantes.getEstudiantes();
+        ArrayList<String> estudiantesArray = new ArrayList<>();
+
+        for (Object [] estudiante : estudiantes){
+            estudiantesArray.add(estudiante[0].toString() + " - " + estudiante[1].toString() + " " + estudiante[2].toString());
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(estudiantesArray.toArray());
+
+        comboBox.setModel(model);
+    }
 }

@@ -391,18 +391,25 @@ BEGIN
     DELETE FROM Matricula WHERE id_matricula = vid;
 END;
 
-/*
-CREATE TABLE Estudiante (
-    id_estudiante INT NOT NULL,
-    nombre VARCHAR(50),
-    apellido VARCHAR(50),
-    email VARCHAR(50),
-    num_celular int,
-    PRIMARY KEY (id_estudiante)
-);
+create or replace PROCEDURE createMatricula(
+    vcedula IN VARCHAR2,
+    vid_horario IN IN
+    )
+AS
+    vid INT;
+    vid_estudiante INT;
+BEGIN
+    SELECT MAX(id_matricula) + 1 INTO vid
+    FROM Matricula;
+    
+    SELECT id_estudiante INTO vid_estudiante
+    FROM Estudiante WHERE cedula = vcedula;
 
-ALTER TABLE Estudiante
-ADD(cedula varchar(15));
+    INSERT INTO Matricula (id_matricula, fechaMatricula, id_estudiante, id_horario)
+    VALUES (vid, sysdate, vid_estudiante, vid_horario);
+END;
+
+/*
 
 CREATE TABLE Matricula (
     id_matricula INT NOT NULL,
